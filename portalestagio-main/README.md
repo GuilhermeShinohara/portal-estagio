@@ -1,108 +1,130 @@
-# Internship Portal — Full-Stack Internship Management System
+# 🎓 Portal de Estágios
 
-![Java](https://img.shields.io/badge/Java-21-red?style=flat&logo=openjdk)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.5-brightgreen?style=flat&logo=springboot)
-![Maven](https://img.shields.io/badge/Maven-Build-orange?style=flat&logo=apachemaven)
-![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=flat)
+Sistema Full-Stack para gerenciamento de estágios, desenvolvido com Java e Spring Boot, que conecta estudantes e empresas por meio da publicação de vagas, candidaturas e acompanhamento de oportunidades.
 
-A full-stack web application built with **Spring Boot** that connects **university students** and **companies** offering internship opportunities.  
-Provides a complete **REST API** with CRUD operations, **relational modeling**, and a simple **frontend** consuming the backend.
+## 📋 Sobre o Projeto
 
----
+O Portal de Estágios foi desenvolvido com o objetivo de simular um ambiente real de recrutamento para programas de estágio, permitindo que empresas publiquem oportunidades e que estudantes encontrem vagas alinhadas às suas áreas de interesse.
 
-## ✨ Highlights
-
-- ✅ Layered architecture (**Controller / Service / Repository / Model**)
-- ✅ Relational modeling with **1:N** and **N:M** relationships
-- ✅ Business validations (unique email/enrollment, required fields)
-- ✅ Referential integrity protection (prevents inconsistent deletions)
-- ✅ Filtering + pagination for internship positions
-- ✅ Swagger documentation + Postman-friendly responses
+O projeto aplica conceitos de desenvolvimento de software, modelagem de dados, arquitetura em camadas e construção de APIs REST, seguindo boas práticas de organização, validação e integridade dos dados.
 
 ---
 
-## 🧩 Problem Context
+## ✨ Principais Funcionalidades
 
-Companies need a structured way to publish internship opportunities and manage applications.  
-Students need a centralized platform to explore positions aligned with their interests and background.
-
-This project simulates a real internship marketplace focusing on:
-
-- Entity relationship design
-- REST API structure and good practices
-- Business rules & validation
-- Data integrity and consistency
-- Full-stack integration (frontend consuming API)
-
----
-
-## 🏗️ Architecture
-
-The application follows a **layered architecture** with separation of concerns:
-
-- **Controller Layer** → HTTP requests and REST endpoints    
-- **Repository Layer** → data access (Spring Data JPA)  
-- **Model Layer** → JPA entities and mappings  
-- **Database Layer** → H2 (in-memory) for development  
-- **Frontend Layer** → HTML/CSS + Vanilla JS consuming the API  
+* Cadastro e gerenciamento de empresas
+* Cadastro e gerenciamento de estudantes
+* Cadastro de áreas de interesse
+* Publicação e gerenciamento de vagas de estágio
+* Controle de inscrições em vagas
+* Encerramento de vagas
+* Filtros de pesquisa
+* Paginação de resultados
+* Validações de negócio
+* Documentação da API com Swagger
 
 ---
 
-## 🗄️ Data Model
+## 🏗️ Arquitetura da Aplicação
 
-### Entities
-- Company
-- Student
-- InternshipPosition
-- Area
-- Application
+A aplicação foi desenvolvida seguindo o padrão de arquitetura em camadas (Layered Architecture), promovendo separação de responsabilidades, escalabilidade e facilidade de manutenção.
 
-### Relationships
-- Company → InternshipPosition (**1:N**)  
-- InternshipPosition ↔ Area (**N:M**)  
-- Student ↔ Area (**N:M**)  
-- Student → Application (**1:N**)  
-- InternshipPosition → Application (**1:N**)  
+### Camadas
 
-Designed to ensure **referential integrity**, prevent invalid deletions, and represent marketplace interactions.
+#### Controller
+
+Responsável por receber requisições HTTP e retornar respostas da API.
+
+#### Service
+
+Implementa as regras de negócio e validações da aplicação.
+
+#### Repository
+
+Realiza a comunicação com o banco de dados utilizando Spring Data JPA.
+
+#### Model
+
+Representa as entidades do domínio e seus relacionamentos.
+
+#### Database
+
+Persistência dos dados utilizando banco H2 em memória para ambiente de desenvolvimento.
+
+#### Frontend
+
+Interface web desenvolvida com HTML, CSS e JavaScript consumindo a API REST.
 
 ---
 
-## 🛠️ Tech Stack
+## 🗄️ Modelagem de Dados
+
+### Entidades
+
+* Empresa
+* Estudante
+* Vaga de Estágio
+* Área
+* Inscrição
+
+### Relacionamentos
+
+| Relacionamento        | Tipo |
+| --------------------- | ---- |
+| Empresa → Vaga        | 1:N  |
+| Vaga ↔ Área           | N:M  |
+| Estudante ↔ Área      | N:M  |
+| Estudante → Inscrição | 1:N  |
+| Vaga → Inscrição      | 1:N  |
+
+A modelagem foi projetada para garantir integridade referencial e consistência dos dados, evitando operações que possam comprometer o relacionamento entre as entidades.
+
+---
+
+## ⚙️ Regras de Negócio
+
+O sistema implementa diversas validações para garantir a qualidade dos dados:
+
+* E-mail único para estudantes e empresas
+* Matrícula única para estudantes
+* Campos obrigatórios validados
+* Proteção contra exclusões inconsistentes
+* Validação de relacionamentos entre entidades
+* Controle de status das vagas
+
+---
+
+## 🛠️ Tecnologias Utilizadas
 
 ### Backend
-- Java 21
-- Spring Boot 3.4.5
-- Spring Data JPA + Hibernate
-- H2 Database
-- Maven
+
+* Java 21
+* Spring Boot 3.4.5
+* Spring Data JPA
+* Hibernate
+* Maven
+* H2 Database
 
 ### Frontend
-- HTML5
-- CSS3
-- Vanilla JavaScript (REST API consumption)
+
+* HTML5
+* CSS3
+* JavaScript (Vanilla JS)
+
+### Ferramentas
+
+* Swagger/OpenAPI
+* Postman
+* Git
+* GitHub
 
 ---
 
-## ⚙️ Features
+## 📡 Endpoints da API
 
-- CRUD for **Companies, Students, Areas, Internship Positions, Applications**
-- Structured REST endpoints
-- Internship positions filtering by **company** and **area**
-- Pagination for scalable retrieval
-- Business validations:
-  - unique email
-  - unique enrollment
-  - required fields
-- Endpoint documentation (Swagger)
+### Empresas
 
----
-
-## 📡 REST API Endpoints
-
-### Companies
-
-```
+```http
 GET    /api/empresas
 GET    /api/empresas/{id}
 POST   /api/empresas
@@ -110,9 +132,9 @@ PUT    /api/empresas/{id}
 DELETE /api/empresas/{id}
 ```
 
-### Students
+### Estudantes
 
-```
+```http
 GET    /api/estudantes
 GET    /api/estudantes/{id}
 POST   /api/estudantes
@@ -120,9 +142,9 @@ PUT    /api/estudantes/{id}
 DELETE /api/estudantes/{id}
 ```
 
-### Internship Positions
+### Vagas
 
-```
+```http
 GET    /api/vagas
 GET    /api/vagas/{id}
 POST   /api/vagas
@@ -131,11 +153,15 @@ PATCH  /api/vagas/{id}/encerrar
 DELETE /api/vagas/{id}
 ```
 
-Supports filtering by company and area, as well as pagination parameters.
+Recursos adicionais:
 
-### Areas
+* Filtro por empresa
+* Filtro por área
+* Paginação
 
-```
+### Áreas
+
+```http
 GET    /api/areas
 GET    /api/areas/{id}
 POST   /api/areas
@@ -143,45 +169,101 @@ PUT    /api/areas/{id}
 DELETE /api/areas/{id}
 ```
 
-### Applications
+### Inscrições
 
-```
+```http
 GET    /api/inscricoes
 POST   /api/inscricoes
 PATCH  /api/inscricoes/{id}
 DELETE /api/inscricoes/{id}
 ```
 
-## 🚀 How to Run
+---
 
-### Requirements
+## 🚀 Como Executar o Projeto
 
-* Java 21+
-* Maven 3.9+
+### Pré-requisitos
 
-### Steps
+* Java 21 ou superior
+* Maven 3.9 ou superior
+* Git
 
-Clone the repository:
+### Clonando o Repositório
 
 ```bash
-git clone https://github.com/KauanSarzi/portalestagio
-cd portalestagio
+git clone https://github.com/SEU-USUARIO/portal-estagio.git
 ```
 
-Build and run:
+```bash
+cd portal-estagio
+```
+
+### Compilando o Projeto
 
 ```bash
 mvn clean install
+```
+
+### Executando a Aplicação
+
+```bash
 mvn spring-boot:run
 ```
 
-Access the application at:
+A aplicação estará disponível em:
 
-```
+```text
 http://localhost:8080
 ```
-## 👤 Author
 
-**Kauan Sarzi da Rocha**  
-- [![LinkedIn](https://img.shields.io/badge/LinkedIn-Kauan%20Sarzi-0077B5?style=flat&logo=linkedin)](https://linkedin.com/in/kauan-sarzi)
-- [![Email](https://img.shields.io/badge/Email-kauansarzi24@gmail.com-D14836?style=flat&logo=gmail)](mailto:kauansarzi24@gmail.com)
+---
+
+## 📖 Documentação da API
+
+Após iniciar a aplicação, a documentação Swagger poderá ser acessada através do navegador:
+
+```text
+http://localhost:8080/swagger-ui.html
+```
+
+ou
+
+```text
+http://localhost:8080/swagger-ui/index.html
+```
+
+---
+
+## 🎯 Objetivos de Aprendizagem
+
+Este projeto foi desenvolvido para consolidar conhecimentos em:
+
+* Desenvolvimento de APIs REST
+* Spring Boot
+* Persistência de dados com JPA/Hibernate
+* Modelagem de banco de dados relacional
+* Arquitetura em camadas
+* Regras de negócio e validações
+* Integração Frontend e Backend
+* Boas práticas de desenvolvimento de software
+
+---
+
+## 📌 Melhorias Futuras
+
+* Autenticação e autorização com JWT
+* Controle de perfis (Administrador, Empresa e Estudante)
+* Upload de currículo
+* Notificações por e-mail
+* Banco de dados PostgreSQL
+* Deploy em ambiente cloud
+* Testes automatizados
+* Dashboard administrativo
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido como projeto acadêmico para aplicação prática de conceitos de Engenharia de Software, Desenvolvimento Web e Banco de Dados.
+
+**Guilherme Shinohara**
